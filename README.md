@@ -7,5 +7,7 @@ and eventually notify when searched word will show.
 
 # TODO:
 * set up level parsing, a'la curl/wget 
-* output to file/commit via POST/GET to websites?
+* output to file/commit via POST/GET to websites? OR just
+* notify user using system ballons/tip/clouds?
+* create service, to work in background
 * sandwich, cuz i'm hungry
