@@ -12,7 +12,6 @@ public class WebsiteParser  {
         
         WebsiteObserver websiteObserver1 = new WebsiteObserver(websiteGrabber);
         
-        
         /* pretend that we are parsing websites */
         // and finally we found searched word on given website
         websiteGrabber.setWebsiteWhichWasChanged(
