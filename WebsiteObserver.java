@@ -10,7 +10,7 @@ interface Observer {
     public void update(String websiteURL, String searchWord, String time);
 }
 
-public class WebsiteObserver implements Observer{
+class WebsiteObserver implements Observer{
     /*private String websiteURL;
     private String searchWord;
     private String time;*/

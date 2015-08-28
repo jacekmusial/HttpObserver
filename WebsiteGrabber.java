@@ -13,8 +13,8 @@ interface Subject {
     public void notifyObserver();
 }
 
-public class WebsiteGrabber implements Subject{
-    private ArrayList<Observer> observers;
+class WebsiteGrabber implements Subject{
+    protected ArrayList<Observer> observers;
     private String websiteURL;
     private String searchWord;
     private String time;
@@ -43,7 +43,7 @@ public class WebsiteGrabber implements Subject{
     }
     
     public void setWebsiteWhichWasChanged(String websiteURL,
-    String searchWord, String time) {
+        String searchWord, String time) {
         this.websiteURL = websiteURL;
         this.searchWord = searchWord;
         this.time = time;
