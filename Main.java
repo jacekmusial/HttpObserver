@@ -3,6 +3,7 @@ package HttpObserver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -30,26 +31,15 @@ public class Main {
     
     public static void main (String[] args) {
         
-        Random rand = new Random();
-        /*ArrayList<WebsiteParser> websiteParser;
-        websiteParser = new ArrayList<>(3);
-        websiteParser.add(new WebsiteParser("asda"+rand.nextInt()+"asd",
-        "zcx"));
+        WebsiteParser websiteParser;
+        websiteParser = new WebsiteParser("http://onet.pl", "uczniów");
         
-        websiteParser.add(new WebsiteParser("XD"+rand.nextInt()+"asd",
-        "x"));*/
-        
-        WebsiteParser websiteParser = new WebsiteParser(
-                "http://powiatsuski24.pl", "sucha beskidzka");
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService scheduler;
+        scheduler = Executors.newScheduledThreadPool(2);
         
         final ScheduledFuture<?> websiteParserHandle;
+        //(try to) parse website 4 times in one minute
         websiteParserHandle = scheduler.scheduleWithFixedDelay(
-            websiteParser, 0, 1, TimeUnit.DAYS);
-        if (websiteParserHandle.cancel(true)) {
-            System.out.println("asda");
-        }
- 
-       
+                websiteParser, 2, 15, TimeUnit.SECONDS); 
     }
 }
