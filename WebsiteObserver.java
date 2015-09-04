@@ -15,22 +15,11 @@ class WebsiteObserver implements Observer{
     private String searchWord;
     private String time;*/
     
-    //global counter
-    private static int observerIDTracker = 0;
-    
-    //its to track observers
-    private int observerID;
-    
     private Subject WebsiteGrabber;
 
     public WebsiteObserver(Subject WebsiteGrabber) {
         //store reference, so i can make calls
         //to its methods
-        this.WebsiteGrabber = WebsiteGrabber;
-
-        this.observerID = ++observerIDTracker;
-        
-        System.out.println("new observer: " + this.observerID);
         WebsiteGrabber.register(this);
     }
     

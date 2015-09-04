@@ -7,22 +7,41 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
  * @author re
  */
 final class WebsiteParser implements Runnable {
-    private Thread taskThread;
+    private static Set<String> results;
     private String websiteURL;
     private String searchWord;
     private URL mainURL;
-    private Boolean isDone;
-    private List<String> results;
+    private static int observerIDTracker = 0; /*global counter*/
+    private int observerID; /*to tracking observers*/
+    
+    public WebsiteParser(String websiteURL, String searchWord) {
+        results = new TreeSet<>();
+        
+        if (isValidURL(websiteURL)) {
+            this.websiteURL = websiteURL;
+            this.searchWord = searchWord;
+        }
+        else {
+            System.out.println("URL is incorrect. Exiting: -1");
+            System.exit(-1);
+        }
+      
+        this.observerID = ++observerIDTracker;
+        
+        System.out.print("OBSERVER " + this.observerID);
+        System.out.printf(", looking in %s for \"%s\" \n",
+                websiteURL, searchWord);
+    }
     
     public boolean isValidURL(String url) {  
         URL u;
@@ -42,21 +61,6 @@ final class WebsiteParser implements Runnable {
         return true;
     } 
     
-    public WebsiteParser(String websiteURL, String searchWord) {
-        this.isDone = false;
-        results = new ArrayList<>();
-        
-        if (isValidURL(websiteURL)) {
-            this.websiteURL = websiteURL;
-            this.searchWord = searchWord;
-            this.run();
-        }
-        else {
-            System.out.println("URL is incorrect. Exiting: -1");
-            System.exit(-1);
-        }
-    }
-
     @Override
     public void run() {
       //while(!isDone) { 

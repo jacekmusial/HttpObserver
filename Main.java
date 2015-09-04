@@ -30,16 +30,22 @@ public class Main {
     }
     
     public static void main (String[] args) {
+        //is there better way to handle threads&observers?
+        WebsiteParser[] websiteParser = new WebsiteParser[2]; 
+        websiteParser[0] = new WebsiteParser("http://onet.pl", "uczniów");
+        websiteParser[1] = new WebsiteParser("https://github.com", "repositor");
         
-        WebsiteParser websiteParser;
-        websiteParser = new WebsiteParser("http://onet.pl", "uczniów");
+        ScheduledExecutorService scheduler 
+                = Executors.newScheduledThreadPool(2);
         
-        ScheduledExecutorService scheduler;
-        scheduler = Executors.newScheduledThreadPool(2);
+        for (WebsiteParser wp : websiteParser ) {
+            scheduler.scheduleWithFixedDelay(wp, 2, 5, TimeUnit.MINUTES);
+            wp.run();
+        }
         
-        final ScheduledFuture<?> websiteParserHandle;
-        //(try to) parse website 4 times in one minute
+        /*final ScheduledFuture<?> websiteParserHandle;
         websiteParserHandle = scheduler.scheduleWithFixedDelay(
-                websiteParser, 2, 15, TimeUnit.SECONDS); 
+        websiteParser, 2, 5, TimeUnit.SECONDS); */
+        
     }
 }
