@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -33,7 +34,7 @@ public class Main {
         //is there better way to handle threads&observers?
         WebsiteParser[] websiteParser = new WebsiteParser[2]; 
         websiteParser[0] = new WebsiteParser("http://onet.pl", "uczniów");
-        websiteParser[1] = new WebsiteParser("https://github.com", "repositor");
+        websiteParser[1] = new WebsiteParser("https://github.com", "reposit");
         
         ScheduledExecutorService scheduler 
                 = Executors.newScheduledThreadPool(2);

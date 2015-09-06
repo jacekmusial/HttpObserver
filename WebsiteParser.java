@@ -18,11 +18,13 @@ import java.util.TreeSet;
  */
 final class WebsiteParser implements Runnable {
     private static Set<String> results;
+    private static String sourceOfWebsite;
+    private static String hashOfWebsite;
+    private static int observerIDTracker = 0; /*global counter*/
+    private int observerID; /*to tracking observers*/
     private String websiteURL;
     private String searchWord;
     private URL mainURL;
-    private static int observerIDTracker = 0; /*global counter*/
-    private int observerID; /*to tracking observers*/
     
     public WebsiteParser(String websiteURL, String searchWord) {
         results = new TreeSet<>();
@@ -86,13 +88,14 @@ final class WebsiteParser implements Runnable {
                 while ((inputLine = in.readLine()) != null) {
                     if (inputLine.indexOf(searchWord) != -1) {
                         results.add(inputLine);
+                        System.out.println(inputLine);
                         ++counter;
                     }
                 }
                 if (counter > 0) {
                     Date date = Calendar.getInstance().getTime();
-                    System.out.printf("%d matches on %s website, found at %s\n",
-                        counter, this.websiteURL, date.toString());
+                    System.out.printf("OBSERVER %d: %d matches on %s website, found at %s\n",
+                        this.observerID,counter, this.websiteURL, date.toString());
                     results.stream().forEach(System.out::println);
                 }
             }
